@@ -5,11 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     [SerializeField] private int health;
     [SerializeField] private float movementSpeed = 10f;
+    private int shootingRange = 50;
     private int floorMask;
     private float camRayLength = 100f;
     private Rigidbody rb;
     private float gunFireRate = 0.1f;
     private bool canFire = true;
+    private int enemyLayer;
+    private int damage = 10;
 
     private void Start() {
         floorMask = LayerMask.GetMask("Floor");
@@ -41,7 +44,29 @@ public class Player : MonoBehaviour {
     }
 
     private void Fire() {
-        GameObject bullet = Instantiate(GameManager.Instance.Bullet_prefab, transform.GetChild(1).position, transform.GetChild(0).rotation);
+        Transform obj = null;
+        RaycastHit hit;
+
+        // Looks for the child GameObject used as a dummy for the projectile exit.
+        for (int i = 0; i < transform.childCount; i++) {
+            if (transform.GetChild(i).name == "ProjectileExit") {
+                obj = transform.GetChild(i);
+            }
+        }
+
+        // Performs a raycast from
+        if (Physics.Raycast(obj.position, obj.forward, out hit, shootingRange)) {
+            hit.transform.GetComponent<Enemy>().TakeDamage(damage);
+
+            // Draws a line from the players ProjectileExit towards the object that's
+            // been hit with a green line for 5 seconds.
+            Debug.DrawLine(obj.position, hit.transform.position, Color.green, 5.0f);
+        }
+        else {
+            // Draws a line from the players ProjectileExit towards the direction the
+            // player was facing with a red line for 5 seconds.
+            Debug.DrawLine(obj.position, obj.position + (obj.forward * shootingRange), Color.red, 5.0f);
+        }
     }
 
     private void Movement() {
