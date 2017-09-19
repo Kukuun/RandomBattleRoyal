@@ -1,13 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     private static GameManager instance = null;
-    [SerializeField]private GameObject projectile_prefab;
-    private GameObject[] staticObjects;
-    private GameObject[] dynamicObjects;
+    /// <summary>
+    /// Enemy prefab.
+    /// </summary>
+    [SerializeField] private GameObject enemy_prefab;
+    /// <summary>
+    /// Floor prefab.
+    /// </summary>
+    [SerializeField] private GameObject floor_prefab;
+    /// <summary>
+    /// List for all static objects in the scene.
+    /// </summary>
+    [SerializeField] private List<GameObject> staticObjects;
+    /// <summary>
+    /// List for all dynamic objects in the scene.
+    /// </summary>
+    private List<GameObject> dynamicObjects;
+    /// <summary>
+    /// UIManager reference.
+    /// </summary>
     private UIManager uiManager;
+    /// <summary>
+    /// AudioManager reference.
+    /// </summary>
     private AudioManager audioManager;
 
+    /// <summary>
+    /// Property that grants access to the other properties in this class.
+    /// </summary>
     public static GameManager Instance {
         get {
             return instance;
@@ -18,13 +41,43 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public GameObject Bullet_prefab {
+    public GameObject Enemy_prefab {
         get {
-            return projectile_prefab;
+            return enemy_prefab;
         }
 
         set {
-            projectile_prefab = value;
+            enemy_prefab = value;
+        }
+    }
+
+    public GameObject Ground_prefab {
+        get {
+            return floor_prefab;
+        }
+
+        set {
+            floor_prefab = value;
+        }
+    }
+
+    public List<GameObject> StaticObjects {
+        get {
+            return staticObjects;
+        }
+
+        set {
+            staticObjects = value;
+        }
+    }
+
+    public List<GameObject> DynamicObjects {
+        get {
+            return dynamicObjects;
+        }
+
+        set {
+            dynamicObjects = value;
         }
     }
 
