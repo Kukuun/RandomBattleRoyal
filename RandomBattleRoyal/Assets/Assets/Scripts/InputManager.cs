@@ -36,10 +36,17 @@ public class InputManager : MonoBehaviour {
             SceneManager.LoadScene("Scene03");
         }
         if (Input.GetKeyDown(KeyCode.G)) {
-            GameObject gr = GameObject.Find("Ground");
+            GameObject floor = null;
+
+            foreach (var item in GameManager.Instance.StaticObjects) {
+                if (item.name == "Floor") {
+                    floor = item;
+                }
+            }
+
             GameObject enemy = GameManager.Instance.Enemy_prefab;
 
-            Vector3 spawnPosition = CalculateRandomSpawnPosition(gr, 5f, 2f);
+            Vector3 spawnPosition = CalculateRandomSpawnPosition(floor, 5f, 2f);
 
             Instantiate(enemy, spawnPosition, Quaternion.identity);
         }

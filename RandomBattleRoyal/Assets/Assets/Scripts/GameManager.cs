@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
     private static GameManager instance = null;
+    [Header("Prefabs")]
     /// <summary>
     /// Enemy prefab.
     /// </summary>
@@ -11,6 +12,9 @@ public class GameManager : MonoBehaviour {
     /// Floor prefab.
     /// </summary>
     [SerializeField] private GameObject floor_prefab;
+
+    [Space(5)]
+    [Header("Lists of objects")]
     /// <summary>
     /// List for all static objects in the scene.
     /// </summary>
