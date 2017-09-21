@@ -315,9 +315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275d454c0c66a944bbb3368081d2d723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_prefab: {fileID: 1319133116850580, guid: a86c836be49523f4793e7e1d7d8ace1f,
-    type: 2}
-  floor_prefab: {fileID: 0}
+  prefabs:
+  - {fileID: 1319133116850580, guid: a86c836be49523f4793e7e1d7d8ace1f, type: 2}
+  - {fileID: 1208399264668136, guid: 1462a571c18a34f488c284ded8c75bc9, type: 2}
+  - {fileID: 1671086202856970, guid: 29f8296324896fb45aae0864858858b0, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   staticObjects:
   - {fileID: 1817845357}
   - {fileID: 1145033886}
@@ -813,7 +816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: d363b9a4f8f6e26469542fc5bd0246d7, type: 2}
+  profile: {fileID: 0}
 --- !u!1 &691964771
 GameObject:
   m_ObjectHideFlags: 0

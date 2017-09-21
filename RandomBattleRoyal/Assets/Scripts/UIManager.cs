@@ -4,10 +4,18 @@ using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour {
     private static UIManager instance = null;
-    private Button[] buttons;
-    private Text[] texts;
-    private Slider[] sliders;
-    private List<Text> text;
+    /// <summary>
+    /// List containing references for all buttons.
+    /// </summary>
+    private List<Button> buttons;
+    /// <summary>
+    /// List containing references for all texts.
+    /// </summary>
+    private List<Text> texts;
+    /// <summary>
+    /// List containing references for all sliders.
+    /// </summary>
+    private List<Slider> sliders;
 
     private void Awake() {
         if (instance == null) {

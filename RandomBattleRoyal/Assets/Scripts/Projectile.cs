@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-    - Replace collision detection with ray casting.
-    - Make particles for muzzle flash.
+    - CURRENTLY NOT USED - SAVE FOR LATER.
 */
 
 public class Projectile : MonoBehaviour {

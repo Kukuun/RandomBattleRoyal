@@ -1,14 +1,34 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
     private static AudioManager instance = null;
-    private AudioClip[] music;
-    private AudioClip[] sfx;
-    private AudioClip[] voice;
+    /// <summary>
+    /// List for all music tracts.
+    /// </summary>
+    private List<AudioClip> music;
+    /// <summary>
+    /// List for all sound effects.
+    /// </summary>
+    private List<AudioClip> sfx;
+    /// <summary>
+    /// List for all voice lines.
+    /// </summary>
+    private List<AudioClip> voice;
+
+    public static AudioManager Instance {
+        get {
+            return instance;
+        }
+
+        set {
+            instance = value;
+        }
+    }
 
     private void Awake() {
-        if (instance == null) {
-            instance = this;
+        if (Instance == null) {
+            Instance = this;
         }
         else {
             Destroy(gameObject);
