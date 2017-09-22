@@ -40,6 +40,13 @@ public class InputManager : MonoBehaviour {
             GameObject enemy = null;
 
             foreach (var item in GameManager.Instance.StaticObjects) {
+                if (item == null) {
+                    Debug.Log("item is null");
+                    break;
+                }
+            }
+
+            foreach (var item in GameManager.Instance.StaticObjects) {
                 if (item.name == "Floor") {
                     floor = item;
                     break;
@@ -50,13 +57,12 @@ public class InputManager : MonoBehaviour {
                 if (item.name == "Enemy") {
                     //GameManager.Instance.DynamicObjects.Add(item);
                     enemy = item;
+                    Vector3 spawnPosition = CalculateRandomSpawnPosition(floor, 5f, 2f);
+
+                    Instantiate(enemy, spawnPosition, Quaternion.identity);
                     break;
                 }
-            }
-            
-            Vector3 spawnPosition = CalculateRandomSpawnPosition(floor, 5f, 2f);
-
-            Instantiate(enemy, spawnPosition, Quaternion.identity);
+            }            
         }
     }
 
