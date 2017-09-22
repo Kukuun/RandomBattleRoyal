@@ -36,38 +36,34 @@ public class InputManager : MonoBehaviour {
             SceneManager.LoadScene("Scene03");
         }
         if (Input.GetKeyDown(KeyCode.G)) {
-            GameObject floor = null;
-            GameObject enemy = null;
-
-            foreach (var item in GameManager.Instance.StaticObjects) {
-                if (item == null) {
-                    Debug.Log("item is null");
-                    break;
-                }
-            }
-
-            foreach (var item in GameManager.Instance.StaticObjects) {
-                if (item.name == "Floor") {
-                    floor = item;
-                    break;
-                }
-            }
-
-            foreach (var item in GameManager.Instance.Prefabs) {
-                if (item.name == "Enemy") {
-                    //GameManager.Instance.DynamicObjects.Add(item);
-                    enemy = item;
-                    Vector3 spawnPosition = CalculateRandomSpawnPosition(floor, 5f, 2f);
-
-                    Instantiate(enemy, spawnPosition, Quaternion.identity);
-                    break;
-                }
-            }            
+            SpawnEnemy("Enemy", "Floor");
         }
     }
 
     /// <summary>
-    /// Calculates a position within the floor where an object can safely spawn.
+    /// Spawns an enemy at a possible spawn position.
+    /// </summary>
+    /// <param name="prefabName">Name of Enemy prefab.</param>
+    /// <param name="spawningArea">Name of area where an enemy should be able to spawn.</param>
+    private void SpawnEnemy(string prefabName, string spawningArea) {
+        foreach (var prefab in GameManager.Instance.Prefabs) {
+            if (prefab.name == prefabName) {
+                foreach (var obj in GameManager.Instance.StaticObjects) {
+                    if (obj.name == spawningArea) {
+                        GameObject floor = obj;
+                        GameObject enemy = prefab;
+
+                        Vector3 spawnPosition = CalculateRandomSpawnPosition(floor, 5f, 2f);
+                        Instantiate(enemy, spawnPosition, Quaternion.identity);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Calculates a possible spawn position within the platform where an object can safely spawn.
     /// </summary>
     /// <param name="obj">Floor object.</param>
     /// <param name="borderMargin">A distrance from the border going inwards to get a secure spawn position.</param>
